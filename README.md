@@ -56,6 +56,18 @@ Read [`docs/design-spec-v1.4.2.md`](docs/design-spec-v1.4.2.md) before making pr
 - User-selectable text size
 - The three representative help-assistant interactions in the specification
 
+## Demo boundary
+
+Every order carries its own demo record, so the order list, the drawer, the
+readiness summary and the assistant always agree about the same order. Controls
+that are outside the prototype say so when pressed instead of doing nothing —
+useful in usability sessions, where a silent control reads as a product defect.
+
+Readiness is still staged data, not a rule engine: each order declares its own
+outstanding items, and the drawer derives progress, the completion state and the
+assistant's answer from that one list. The real requirement engine (§2.9 of the
+specification) is phase-0 work and does not exist here.
+
 ## Deployment metadata
 
 `.openai/hosting.json` links this checkout to the existing private OpenAI Sites project and declares `dist/` as its static output directory. It contains no chat history, API keys, or deployment credentials. Keep it committed so Sites-aware tooling updates the same project; other development tools may safely ignore it.

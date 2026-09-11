@@ -83,7 +83,7 @@
             <kbd>⌘ K</kbd>
           </button>
           <div class="top-actions">
-            <button class="icon-button" aria-label="Varsler, 2 uleste">
+            <button class="icon-button" data-demo="Varsler er ikke med i prototypen." aria-label="Varsler, 2 uleste">
               <span aria-hidden="true">♢</span><span class="notification-dot">2</span>
             </button>
             <button class="new-button" id="newButton"><span aria-hidden="true">＋</span> Ny</button>
@@ -96,7 +96,7 @@
               <div>
                 <p class="eyebrow">Fredag 11. september</p>
                 <h1>God morgen, Kari</h1>
-                <p class="page-intro">Du har fire besøk i dag. Neste starter om 35 minutter.</p>
+                <p class="page-intro">Du har fire besøk i dag. Du er i gang med det første.</p>
               </div>
               <button class="secondary-button desktop-only" data-open-assistant>
                 <span aria-hidden="true">✦</span> Spør assistenten
@@ -106,7 +106,7 @@
             <div class="status-strip" aria-label="Status for arbeidsdagen">
               <button class="status-cell status-sync" id="syncStatusButton">
                 <span class="status-icon success" aria-hidden="true">✓</span>
-                <span><strong>Alt er synkronisert</strong><small>Sist nå</small></span>
+                <span><strong>Alt er synkronisert</strong><small>Ingenting venter i køen</small></span>
               </button>
               <div class="status-cell">
                 <span class="status-number">4</span>
@@ -127,7 +127,7 @@
                   </div>
                   <div class="segmented" role="group" aria-label="Velg dag">
                     <button class="is-selected">I dag</button>
-                    <button>I morgen</button>
+                    <button data-demo="Prototypen viser bare dagens besøk.">I morgen</button>
                   </div>
                 </div>
 
@@ -138,7 +138,7 @@
                     <div class="visit-content">
                       <div class="visit-topline">
                         <span class="tag tag-blue">Service</span>
-                        <span class="tag tag-outline">Neste</span>
+                        <span class="tag tag-outline">Pågår nå</span>
                         <span class="visit-id">ORD-1048</span>
                       </div>
                       <h3>Anne Lise Nordby</h3>
@@ -148,9 +148,9 @@
                         <span><span aria-hidden="true">◷</span> Årsservice</span>
                       </div>
                       <div class="visit-actions">
-                        <button class="primary-button start-visit" data-order="1048">Start besøket</button>
-                        <button class="map-button" aria-label="Åpne Granstubben 14 i kart"><span aria-hidden="true">⌖</span> Kart</button>
-                        <button class="more-button" aria-label="Flere valg for ORD-1048">•••</button>
+                        <button class="primary-button start-visit" data-order="1048">Fortsett besøket</button>
+                        <button class="map-button" data-demo="Kartet åpnes i Google/Apple Maps i den ferdige appen." aria-label="Åpne Granstubben 14 i kart"><span aria-hidden="true">⌖</span> Kart</button>
+                        <button class="more-button" data-demo="Flere ordrevalg er ikke med i prototypen." aria-label="Flere valg for ORD-1048">•••</button>
                       </div>
                     </div>
                   </article>
@@ -219,7 +219,7 @@
                   </button>
                   <button class="followup-row" data-order="1036">
                     <span class="followup-icon warning" aria-hidden="true">↻</span>
-                    <span><strong>Synkronisering feilet</strong><small>ORD-1036 · Service</small></span>
+                    <span><strong>Ferdigmelding ble avvist</strong><small>ORD-1036 · Service</small></span>
                     <span aria-hidden="true">›</span>
                   </button>
                   <button class="text-button" data-view="ordrer" data-filter="followup">Se alle som krever oppfølging</button>
@@ -242,7 +242,7 @@
           <section class="view" id="view-ordrer" data-view-panel="ordrer">
             <div class="page-header orders-header">
               <div><p class="eyebrow">Arbeidsordre</p><h1>Ordrer</h1><p class="page-intro">12 åpne ordre, 4 planlagt i dag.</p></div>
-              <button class="primary-button"><span aria-hidden="true">＋</span> Ny ordre</button>
+              <button class="primary-button" data-demo="Å opprette ordre er ikke med i prototypen."><span aria-hidden="true">＋</span> Ny ordre</button>
             </div>
             <div class="list-toolbar">
               <label class="list-search"><span aria-hidden="true">⌕</span><span class="sr-only">Søk i ordre</span><input id="orderSearch" type="search" placeholder="Søk i ordre" /></label>
@@ -251,7 +251,7 @@
                 <button class="chip" data-order-filter="today">I dag <span>4</span></button>
                 <button class="chip" data-order-filter="followup">Krever oppfølging <span>2</span></button>
               </div>
-              <button class="secondary-button filter-button"><span aria-hidden="true">≡</span> Filter</button>
+              <button class="secondary-button filter-button" data-demo="Avansert filtrering er ikke med i prototypen. Bruk hurtigfiltrene eller søket."><span aria-hidden="true">≡</span> Filter</button>
             </div>
             <div class="orders-table-wrap">
               <table class="orders-table">
@@ -267,12 +267,12 @@
           </section>
 
           <section class="view placeholder-view" id="view-kunder" data-view-panel="kunder">
-            <div class="page-header"><div><p class="eyebrow">Register</p><h1>Kunder</h1><p class="page-intro">Kunder, adresser og kontaktpersoner.</p></div><button class="primary-button">＋ Ny kunde</button></div>
+            <div class="page-header"><div><p class="eyebrow">Register</p><h1>Kunder</h1><p class="page-intro">Kunder, adresser og kontaktpersoner.</p></div><button class="primary-button" data-demo="Kunderegisteret er ikke med i prototypen.">＋ Ny kunde</button></div>
             <div class="generic-list" id="customerList"></div>
           </section>
 
           <section class="view placeholder-view" id="view-enheter" data-view-panel="enheter">
-            <div class="page-header"><div><p class="eyebrow">Anleggsregister</p><h1>Enheter</h1><p class="page-intro">Utstyr, servicehistorikk og neste frist.</p></div><button class="primary-button">＋ Ny enhet</button></div>
+            <div class="page-header"><div><p class="eyebrow">Anleggsregister</p><h1>Enheter</h1><p class="page-intro">Utstyr, servicehistorikk og neste frist.</p></div><button class="primary-button" data-demo="Enhetsregisteret er ikke med i prototypen.">＋ Ny enhet</button></div>
             <div class="generic-list" id="deviceList"></div>
           </section>
 
@@ -303,55 +303,44 @@
       <div class="drawer-header">
         <button class="back-button" data-close-drawer aria-label="Lukk ordre">←</button>
         <div><p class="eyebrow" id="orderEyebrow">ORD-1048 · Service</p><h2 id="orderTitle">Anne Lise Nordby</h2></div>
-        <button class="more-button" aria-label="Flere ordrevalg">•••</button>
+        <button class="more-button" data-demo="Flere ordrevalg er ikke med i prototypen." aria-label="Flere ordrevalg">•••</button>
       </div>
       <div class="drawer-status">
         <span class="tag tag-blue" id="drawerStatus">Planlagt</span>
+        <span class="sync-label" id="drawerSync"><span aria-hidden="true">✓</span> Synkronisert</span>
         <span id="drawerAddress">Granstubben 14, 1470 Lørenskog</span>
       </div>
       <div class="drawer-tabs" role="tablist" aria-label="Ordrefaner">
         <button role="tab" aria-selected="true" data-order-tab="overview">Oversikt</button>
-        <button role="tab" aria-selected="false" data-order-tab="checklist">Sjekkliste <span class="tab-count">3/4</span></button>
+        <button role="tab" aria-selected="false" data-order-tab="checklist">Sjekkliste <span class="tab-count" id="checklistTabCount">3/4</span></button>
         <button role="tab" aria-selected="false" data-order-tab="activity">Aktivitet</button>
       </div>
       <div class="drawer-body">
         <div class="order-tab-panel is-visible" data-order-panel="overview">
           <section class="order-summary-card">
-            <div class="progress-heading"><div><span class="eyebrow">Ferdigmelding</span><h3>Nesten klart</h3></div><span class="progress-value">75 %</span></div>
-            <div class="progress-track"><span style="width: 75%"></span></div>
-            <ul class="readiness-list">
-              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Arbeid registrert</strong><small>Utført i dag kl. 09:18</small></span></li>
-              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Sjekkliste</strong><small>3 av 3 obligatoriske punkt</small></span></li>
-              <li class="is-missing" id="serialRequirement"><span aria-hidden="true">!</span><span><strong>Serienummer mangler</strong><small>Påkrevd for installert enhet</small></span><button data-focus-serial>Fyll ut</button></li>
-              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Kundesignatur</strong><small>Signert av Anne Lise Nordby</small></span></li>
-            </ul>
+            <div class="progress-heading"><div><span class="eyebrow">Ferdigmelding</span><h3 id="progressHeading">Nesten klart</h3></div><span class="progress-value" id="progressValue">75 %</span></div>
+            <div class="progress-track"><span id="progressBar" style="width: 75%"></span></div>
+            <ul class="readiness-list" id="readinessList"></ul>
           </section>
-          <section class="detail-section">
-            <div class="section-heading compact"><div><h3>Enhet</h3><p>Mitsubishi Kaiteki 6600</p></div><button class="text-button">Se enhet</button></div>
-            <label class="field-label" for="serialNumber">Serienummer <span>(må fylles ut)</span></label>
-            <div class="field-with-action"><input id="serialNumber" type="text" placeholder="F.eks. 21A004592" aria-describedby="serialHelp" /><button aria-label="Skann serienummer">⌗</button></div>
+          <section class="detail-section" id="deviceSection">
+            <div class="section-heading compact"><div><h3>Enhet</h3><p id="deviceName">Mitsubishi Kaiteki 6600</p></div><button class="text-button" data-demo="Enhetssiden er ikke med i prototypen.">Se enhet</button></div>
+            <label class="field-label" for="serialNumber">Serienummer <span id="serialRequiredMark">(må fylles ut)</span></label>
+            <div class="field-with-action"><input id="serialNumber" type="text" placeholder="F.eks. 21A004592" aria-describedby="serialHelp" /><button data-demo="Skanning krever kamera og er ikke med i prototypen." aria-label="Skann serienummer">⌗</button></div>
             <p class="field-help" id="serialHelp">Finnes på merkeskiltet på innedelen.</p>
           </section>
           <section class="detail-section two-column-details">
-            <div><span>Kontaktperson</span><strong>Anne Lise Nordby</strong><a href="tel:+4741234567">41 23 45 67</a></div>
-            <div><span>Jobbtype</span><strong>Service</strong><small>Årsservice</small></div>
+            <div><span>Kontaktperson</span><strong id="contactName">Anne Lise Nordby</strong><a id="contactPhone" href="tel:+4741234567">41 23 45 67</a></div>
+            <div><span>Jobbtype</span><strong id="jobTypeName">Service</strong><small id="jobTypeDetail">Årsservice</small></div>
           </section>
         </div>
         <div class="order-tab-panel" data-order-panel="checklist">
           <section class="checklist-card">
-            <div><p class="eyebrow">Årsservice · 3 av 4</p><h3>Kontrollpunkter</h3></div>
-            <label class="check-row"><input type="checkbox" checked /><span><strong>Rengjør filtre</strong><small>Utført kl. 09:02</small></span></label>
-            <label class="check-row"><input type="checkbox" checked /><span><strong>Kontroller temperatur</strong><small>Utluft 42 °C</small></span></label>
-            <label class="check-row"><input type="checkbox" checked /><span><strong>Kontroller drenering</strong><small>Ingen avvik</small></span></label>
-            <label class="check-row"><input type="checkbox" /><span><strong>Ta bilde av innedel</strong><small>Anbefalt</small></span></label>
+            <div><p class="eyebrow" id="checklistSummary">Årsservice · alle påkrevde punkt utført</p><h3>Kontrollpunkter</h3></div>
+            <div id="checklistItems"></div>
           </section>
         </div>
         <div class="order-tab-panel" data-order-panel="activity">
-          <div class="activity-list">
-            <div><span class="activity-dot"></span><p><strong>Kari startet besøket</strong><small>I dag kl. 08:34</small></p></div>
-            <div><span class="activity-dot"></span><p><strong>Ordren ble synkronisert</strong><small>I dag kl. 08:31</small></p></div>
-            <div><span class="activity-dot"></span><p><strong>Ola planla besøket</strong><small>I går kl. 14:12</small></p></div>
-          </div>
+          <div class="activity-list" id="activityList"></div>
         </div>
       </div>
       <div class="sticky-action">
