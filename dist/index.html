@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b5fa5" />
+    <meta
+      name="description"
+      content="Varmeflyt samler dagens oppdrag, ordrestatus, sjekklister og synkronisering for norske servicebedrifter."
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B5FA5'/%3E%3Cpath d='M8 9l8 14 8-14h-5l-3 6-3-6z' fill='white'/%3E%3Ccircle cx='16' cy='10' r='3' fill='%23F5B641'/%3E%3C/svg%3E"
+    />
+    <title>Varmeflyt — I dag</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Hopp til innhold</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Hovedmeny">
+        <a class="brand" href="#hjem" data-view-link="hjem" aria-label="Varmeflyt, gå til Hjem">
+          <span class="brand-mark" aria-hidden="true"><span>V</span></span>
+          <span class="brand-name">Varmeflyt</span>
+        </a>
+
+        <nav class="primary-nav">
+          <button class="nav-item is-active" data-view="hjem" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">⌂</span><span>Hjem</span>
+          </button>
+          <button class="nav-item" data-view="ordrer">
+            <span class="nav-icon" aria-hidden="true">▤</span><span>Ordrer</span>
+            <span class="nav-count" aria-label="12 åpne ordre">12</span>
+          </button>
+          <button class="nav-item" data-view="kalender">
+            <span class="nav-icon" aria-hidden="true">□</span><span>Kalender</span>
+          </button>
+          <button class="nav-item" data-view="kunder">
+            <span class="nav-icon" aria-hidden="true">◎</span><span>Kunder</span>
+          </button>
+          <button class="nav-item" data-view="enheter">
+            <span class="nav-icon" aria-hidden="true">◇</span><span>Enheter</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-section">
+          <p class="sidebar-label">Arbeidsflate</p>
+          <button class="nav-item" data-view="planlegger">
+            <span class="nav-icon" aria-hidden="true">▦</span><span>Planlegger</span>
+          </button>
+          <button class="nav-item" data-view="rapporter">
+            <span class="nav-icon" aria-hidden="true">↗</span><span>Rapporter</span>
+          </button>
+        </div>
+
+        <div class="sidebar-footer">
+          <button class="profile-button" id="profileButton" aria-expanded="false" aria-controls="profileMenu">
+            <span class="avatar">KH</span>
+            <span class="profile-copy"><strong>Kari Hansen</strong><small>Tekniker</small></span>
+            <span aria-hidden="true">•••</span>
+          </button>
+          <div class="profile-menu" id="profileMenu" hidden>
+            <p>Tekststørrelse</p>
+            <div class="size-switch" role="group" aria-label="Velg tekststørrelse">
+              <button data-font-size="normal" class="is-selected">Normal</button>
+              <button data-font-size="large">Stor</button>
+              <button data-font-size="xlarge">Ekstra stor</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button class="mobile-brand" data-view="hjem" aria-label="Varmeflyt, gå til Hjem">
+            <span class="brand-mark small" aria-hidden="true"><span>V</span></span>
+            <span>Varmeflyt</span>
+          </button>
+          <button class="search-trigger" id="searchTrigger" aria-haspopup="dialog">
+            <span aria-hidden="true">⌕</span>
+            <span>Søk i kunder, ordre og enheter</span>
+            <kbd>⌘ K</kbd>
+          </button>
+          <div class="top-actions">
+            <button class="icon-button" aria-label="Varsler, 2 uleste">
+              <span aria-hidden="true">♢</span><span class="notification-dot">2</span>
+            </button>
+            <button class="new-button" id="newButton"><span aria-hidden="true">＋</span> Ny</button>
+          </div>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+          <section class="view is-visible" id="view-hjem" data-view-panel="hjem">
+            <div class="page-header">
+              <div>
+                <p class="eyebrow">Fredag 11. september</p>
+                <h1>God morgen, Kari</h1>
+                <p class="page-intro">Du har fire besøk i dag. Neste starter om 35 minutter.</p>
+              </div>
+              <button class="secondary-button desktop-only" data-open-assistant>
+                <span aria-hidden="true">✦</span> Spør assistenten
+              </button>
+            </div>
+
+            <div class="status-strip" aria-label="Status for arbeidsdagen">
+              <button class="status-cell status-sync" id="syncStatusButton">
+                <span class="status-icon success" aria-hidden="true">✓</span>
+                <span><strong>Alt er synkronisert</strong><small>Sist nå</small></span>
+              </button>
+              <div class="status-cell">
+                <span class="status-number">4</span>
+                <span><strong>Besøk i dag</strong><small>5 t 45 min planlagt</small></span>
+              </div>
+              <button class="status-cell" data-view="ordrer" data-filter="followup">
+                <span class="status-number warning-text">2</span>
+                <span><strong>Krever oppfølging</strong><small>Se hva som mangler</small></span>
+              </button>
+            </div>
+
+            <div class="home-grid">
+              <section class="schedule-section" aria-labelledby="today-heading">
+                <div class="section-heading">
+                  <div>
+                    <h2 id="today-heading">Dagens besøk</h2>
+                    <p>Planlagt rekkefølge for deg</p>
+                  </div>
+                  <div class="segmented" role="group" aria-label="Velg dag">
+                    <button class="is-selected">I dag</button>
+                    <button>I morgen</button>
+                  </div>
+                </div>
+
+                <div class="timeline">
+                  <article class="visit-card is-next" data-order="1048">
+                    <div class="timeline-time"><strong>08:30</strong><span>09:45</span></div>
+                    <div class="timeline-rail"><span></span></div>
+                    <div class="visit-content">
+                      <div class="visit-topline">
+                        <span class="tag tag-blue">Service</span>
+                        <span class="tag tag-outline">Neste</span>
+                        <span class="visit-id">ORD-1048</span>
+                      </div>
+                      <h3>Anne Lise Nordby</h3>
+                      <p class="address">Granstubben 14, 1470 Lørenskog</p>
+                      <div class="visit-meta">
+                        <span><span aria-hidden="true">◇</span> Mitsubishi Kaiteki 6600</span>
+                        <span><span aria-hidden="true">◷</span> Årsservice</span>
+                      </div>
+                      <div class="visit-actions">
+                        <button class="primary-button start-visit" data-order="1048">Start besøket</button>
+                        <button class="map-button" aria-label="Åpne Granstubben 14 i kart"><span aria-hidden="true">⌖</span> Kart</button>
+                        <button class="more-button" aria-label="Flere valg for ORD-1048">•••</button>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="visit-card" data-order="1051">
+                    <div class="timeline-time"><strong>10:30</strong><span>12:00</span></div>
+                    <div class="timeline-rail"><span></span></div>
+                    <div class="visit-content">
+                      <div class="visit-topline">
+                        <span class="tag tag-purple">Montering</span>
+                        <span class="visit-id">ORD-1051</span>
+                      </div>
+                      <h3>Martin Solheim</h3>
+                      <p class="address">Fjellhamarveien 62, 1472 Fjellhamar</p>
+                      <div class="visit-meta">
+                        <span><span aria-hidden="true">◇</span> Panasonic HZ25XKE</span>
+                        <span><span aria-hidden="true">◷</span> Ferdigstille installasjon</span>
+                      </div>
+                      <button class="row-link" data-order="1051">Se besøket <span aria-hidden="true">→</span></button>
+                    </div>
+                  </article>
+
+                  <article class="visit-card" data-order="1054">
+                    <div class="timeline-time"><strong>13:00</strong><span>14:30</span></div>
+                    <div class="timeline-rail"><span></span></div>
+                    <div class="visit-content">
+                      <div class="visit-topline">
+                        <span class="tag tag-amber">Feilsøking</span>
+                        <span class="visit-id">ORD-1054</span>
+                      </div>
+                      <h3>Borettslaget Furulia</h3>
+                      <p class="address">Furuliveien 8B, 2005 Rælingen</p>
+                      <div class="visit-meta">
+                        <span><span aria-hidden="true">◇</span> Daikin Perfera 40</span>
+                        <span><span aria-hidden="true">◷</span> Ujevn varme</span>
+                      </div>
+                      <button class="row-link" data-order="1054">Se besøket <span aria-hidden="true">→</span></button>
+                    </div>
+                  </article>
+
+                  <article class="visit-card is-compact" data-order="1057">
+                    <div class="timeline-time"><strong>15:00</strong><span>16:00</span></div>
+                    <div class="timeline-rail"><span></span></div>
+                    <div class="visit-content">
+                      <div class="visit-topline">
+                        <span class="tag tag-slate">Befaring</span>
+                        <span class="visit-id">ORD-1057</span>
+                      </div>
+                      <h3>Erik Berg</h3>
+                      <p class="address">Vestbyveien 23, 1920 Sørumsand</p>
+                    </div>
+                  </article>
+                </div>
+              </section>
+
+              <aside class="home-aside" aria-label="Oppgaver og meldinger">
+                <section class="aside-card action-card">
+                  <div class="aside-title-row">
+                    <div class="aside-icon amber" aria-hidden="true">!</div>
+                    <div><h2>Krever oppfølging</h2><p>To saker før arbeidsdagen er ferdig</p></div>
+                  </div>
+                  <button class="followup-row" data-order="1041">
+                    <span class="followup-icon danger" aria-hidden="true">!</span>
+                    <span><strong>Serienummer mangler</strong><small>ORD-1041 · Montering</small></span>
+                    <span aria-hidden="true">›</span>
+                  </button>
+                  <button class="followup-row" data-order="1036">
+                    <span class="followup-icon warning" aria-hidden="true">↻</span>
+                    <span><strong>Synkronisering feilet</strong><small>ORD-1036 · Service</small></span>
+                    <span aria-hidden="true">›</span>
+                  </button>
+                  <button class="text-button" data-view="ordrer" data-filter="followup">Se alle som krever oppfølging</button>
+                </section>
+
+                <section class="aside-card assistant-card">
+                  <div class="assistant-mark" aria-hidden="true">✦</div>
+                  <h2>Hva trenger du hjelp med?</h2>
+                  <p>Assistenten bruker oppsettet og statusen i Varmeflyt.</p>
+                  <div class="prompt-list">
+                    <button data-assistant-prompt="Hvorfor kan jeg ikke ferdigmelde dette besøket?">Hvorfor kan jeg ikke ferdigmelde?</button>
+                    <button data-assistant-prompt="Hvordan legger jeg til en enhet på denne adressen?">Hvordan legger jeg til en enhet?</button>
+                  </div>
+                  <button class="assistant-open" data-open-assistant>Åpne assistenten <span aria-hidden="true">→</span></button>
+                </section>
+              </aside>
+            </div>
+          </section>
+
+          <section class="view" id="view-ordrer" data-view-panel="ordrer">
+            <div class="page-header orders-header">
+              <div><p class="eyebrow">Arbeidsordre</p><h1>Ordrer</h1><p class="page-intro">12 åpne ordre, 4 planlagt i dag.</p></div>
+              <button class="primary-button"><span aria-hidden="true">＋</span> Ny ordre</button>
+            </div>
+            <div class="list-toolbar">
+              <label class="list-search"><span aria-hidden="true">⌕</span><span class="sr-only">Søk i ordre</span><input id="orderSearch" type="search" placeholder="Søk i ordre" /></label>
+              <div class="filter-chips" role="group" aria-label="Filtrer ordre">
+                <button class="chip is-selected" data-order-filter="all">Alle <span>12</span></button>
+                <button class="chip" data-order-filter="today">I dag <span>4</span></button>
+                <button class="chip" data-order-filter="followup">Krever oppfølging <span>2</span></button>
+              </div>
+              <button class="secondary-button filter-button"><span aria-hidden="true">≡</span> Filter</button>
+            </div>
+            <div class="orders-table-wrap">
+              <table class="orders-table">
+                <thead><tr><th>Ordre</th><th>Kunde</th><th>Jobbtype</th><th>Tid</th><th>Arbeidsstatus</th><th>Synkronisering</th><th><span class="sr-only">Handling</span></th></tr></thead>
+                <tbody id="ordersTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="view placeholder-view" id="view-kalender" data-view-panel="kalender">
+            <div class="page-header"><div><p class="eyebrow">Planlegging</p><h1>Kalender</h1><p class="page-intro">Dagens avtaler og besøk i én oversikt.</p></div></div>
+            <div class="agenda-demo" id="agendaDemo"></div>
+          </section>
+
+          <section class="view placeholder-view" id="view-kunder" data-view-panel="kunder">
+            <div class="page-header"><div><p class="eyebrow">Register</p><h1>Kunder</h1><p class="page-intro">Kunder, adresser og kontaktpersoner.</p></div><button class="primary-button">＋ Ny kunde</button></div>
+            <div class="generic-list" id="customerList"></div>
+          </section>
+
+          <section class="view placeholder-view" id="view-enheter" data-view-panel="enheter">
+            <div class="page-header"><div><p class="eyebrow">Anleggsregister</p><h1>Enheter</h1><p class="page-intro">Utstyr, servicehistorikk og neste frist.</p></div><button class="primary-button">＋ Ny enhet</button></div>
+            <div class="generic-list" id="deviceList"></div>
+          </section>
+
+          <section class="view placeholder-view" id="view-planlegger" data-view-panel="planlegger">
+            <div class="page-header"><div><p class="eyebrow">Ressurser</p><h1>Planlegger</h1><p class="page-intro">Fordel dagens oppdrag på tilgjengelige teknikere.</p></div></div>
+            <div class="planner-demo" id="plannerDemo"></div>
+          </section>
+
+          <section class="view placeholder-view" id="view-rapporter" data-view-panel="rapporter">
+            <div class="page-header"><div><p class="eyebrow">Innsikt</p><h1>Rapporter</h1><p class="page-intro">Status for feltarbeid og oppfølging denne uken.</p></div></div>
+            <div class="report-grid" id="reportGrid"></div>
+          </section>
+        </main>
+      </div>
+
+      <nav class="bottom-nav" aria-label="Mobilmeny">
+        <button class="is-active" data-view="hjem"><span aria-hidden="true">⌂</span><small>Hjem</small></button>
+        <button data-view="ordrer"><span aria-hidden="true">▤</span><small>Ordrer</small></button>
+        <button data-view="kalender"><span aria-hidden="true">□</span><small>Kalender</small></button>
+        <button id="mobileSearch"><span aria-hidden="true">⌕</span><small>Søk</small></button>
+        <button data-view="more"><span aria-hidden="true">•••</span><small>Mer</small></button>
+      </nav>
+    </div>
+
+    <div class="overlay" id="overlay" hidden></div>
+
+    <section class="drawer order-drawer" id="orderDrawer" aria-labelledby="orderTitle" aria-hidden="true">
+      <div class="drawer-header">
+        <button class="back-button" data-close-drawer aria-label="Lukk ordre">←</button>
+        <div><p class="eyebrow" id="orderEyebrow">ORD-1048 · Service</p><h2 id="orderTitle">Anne Lise Nordby</h2></div>
+        <button class="more-button" aria-label="Flere ordrevalg">•••</button>
+      </div>
+      <div class="drawer-status">
+        <span class="tag tag-blue" id="drawerStatus">Planlagt</span>
+        <span id="drawerAddress">Granstubben 14, 1470 Lørenskog</span>
+      </div>
+      <div class="drawer-tabs" role="tablist" aria-label="Ordrefaner">
+        <button role="tab" aria-selected="true" data-order-tab="overview">Oversikt</button>
+        <button role="tab" aria-selected="false" data-order-tab="checklist">Sjekkliste <span class="tab-count">3/4</span></button>
+        <button role="tab" aria-selected="false" data-order-tab="activity">Aktivitet</button>
+      </div>
+      <div class="drawer-body">
+        <div class="order-tab-panel is-visible" data-order-panel="overview">
+          <section class="order-summary-card">
+            <div class="progress-heading"><div><span class="eyebrow">Ferdigmelding</span><h3>Nesten klart</h3></div><span class="progress-value">75 %</span></div>
+            <div class="progress-track"><span style="width: 75%"></span></div>
+            <ul class="readiness-list">
+              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Arbeid registrert</strong><small>Utført i dag kl. 09:18</small></span></li>
+              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Sjekkliste</strong><small>3 av 3 obligatoriske punkt</small></span></li>
+              <li class="is-missing" id="serialRequirement"><span aria-hidden="true">!</span><span><strong>Serienummer mangler</strong><small>Påkrevd for installert enhet</small></span><button data-focus-serial>Fyll ut</button></li>
+              <li class="is-done"><span aria-hidden="true">✓</span><span><strong>Kundesignatur</strong><small>Signert av Anne Lise Nordby</small></span></li>
+            </ul>
+          </section>
+          <section class="detail-section">
+            <div class="section-heading compact"><div><h3>Enhet</h3><p>Mitsubishi Kaiteki 6600</p></div><button class="text-button">Se enhet</button></div>
+            <label class="field-label" for="serialNumber">Serienummer <span>(må fylles ut)</span></label>
+            <div class="field-with-action"><input id="serialNumber" type="text" placeholder="F.eks. 21A004592" aria-describedby="serialHelp" /><button aria-label="Skann serienummer">⌗</button></div>
+            <p class="field-help" id="serialHelp">Finnes på merkeskiltet på innedelen.</p>
+          </section>
+          <section class="detail-section two-column-details">
+            <div><span>Kontaktperson</span><strong>Anne Lise Nordby</strong><a href="tel:+4741234567">41 23 45 67</a></div>
+            <div><span>Jobbtype</span><strong>Service</strong><small>Årsservice</small></div>
+          </section>
+        </div>
+        <div class="order-tab-panel" data-order-panel="checklist">
+          <section class="checklist-card">
+            <div><p class="eyebrow">Årsservice · 3 av 4</p><h3>Kontrollpunkter</h3></div>
+            <label class="check-row"><input type="checkbox" checked /><span><strong>Rengjør filtre</strong><small>Utført kl. 09:02</small></span></label>
+            <label class="check-row"><input type="checkbox" checked /><span><strong>Kontroller temperatur</strong><small>Utluft 42 °C</small></span></label>
+            <label class="check-row"><input type="checkbox" checked /><span><strong>Kontroller drenering</strong><small>Ingen avvik</small></span></label>
+            <label class="check-row"><input type="checkbox" /><span><strong>Ta bilde av innedel</strong><small>Anbefalt</small></span></label>
+          </section>
+        </div>
+        <div class="order-tab-panel" data-order-panel="activity">
+          <div class="activity-list">
+            <div><span class="activity-dot"></span><p><strong>Kari startet besøket</strong><small>I dag kl. 08:34</small></p></div>
+            <div><span class="activity-dot"></span><p><strong>Ordren ble synkronisert</strong><small>I dag kl. 08:31</small></p></div>
+            <div><span class="activity-dot"></span><p><strong>Ola planla besøket</strong><small>I går kl. 14:12</small></p></div>
+          </div>
+        </div>
+      </div>
+      <div class="sticky-action">
+        <div><span>Status</span><strong id="completionState">1 punkt mangler</strong></div>
+        <button class="primary-button" id="completeOrderButton">Ferdigmeld besøket</button>
+      </div>
+    </section>
+
+    <section class="drawer assistant-drawer" id="assistantDrawer" aria-labelledby="assistantTitle" aria-hidden="true">
+      <div class="drawer-header assistant-header">
+        <div><p class="eyebrow">Hjelp</p><h2 id="assistantTitle"><span aria-hidden="true">✦</span> Assistent</h2></div>
+        <button class="back-button" data-close-assistant aria-label="Lukk assistenten">×</button>
+      </div>
+      <div class="assistant-mode" role="group" aria-label="Assistentmodus">
+        <button class="is-selected">Hjelp</button><button>Sett opp</button>
+      </div>
+      <div class="assistant-conversation" id="assistantConversation" aria-live="polite">
+        <div class="assistant-welcome">
+          <span class="assistant-mark">✦</span>
+          <h3>Hei, Kari</h3>
+          <p>Jeg kan forklare hvordan Varmeflyt virker og finne ut hvorfor noe stopper.</p>
+        </div>
+        <button class="suggestion" data-assistant-prompt="Hvorfor kan jeg ikke ferdigmelde dette besøket?">Hvorfor kan jeg ikke ferdigmelde dette besøket?</button>
+        <button class="suggestion" data-assistant-prompt="Hvordan legger jeg til en enhet på denne adressen?">Hvordan legger jeg til en enhet på denne adressen?</button>
+        <button class="suggestion admin-suggestion" data-assistant-prompt="Legg til Enova-søknadsnummer på Montering, påkrevd før fakturering.">Legg til Enova-søknadsnummer på Montering</button>
+      </div>
+      <form class="assistant-composer" id="assistantForm">
+        <label class="sr-only" for="assistantInput">Skriv til assistenten</label>
+        <textarea id="assistantInput" rows="1" placeholder="Spør om Varmeflyt …"></textarea>
+        <button type="submit" aria-label="Send melding">↑</button>
+      </form>
+    </section>
+
+    <dialog class="search-dialog" id="searchDialog">
+      <form method="dialog" class="search-dialog-inner">
+        <label class="global-search"><span aria-hidden="true">⌕</span><span class="sr-only">Globalt søk</span><input id="globalSearchInput" placeholder="Søk i Varmeflyt" autocomplete="off" /><button value="cancel" aria-label="Lukk søk">×</button></label>
+        <div class="search-results" id="searchResults"><p class="search-hint">Søk etter kunde, adresse, ordre eller serienummer.</p></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
